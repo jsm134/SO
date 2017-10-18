@@ -12,6 +12,7 @@ int main(int argc, char * argv[]){
 	if(argc == 3){
 		x = atoi(argv[1]);
 		y = atoi(argv[2]);
+		x=x-1;
 		//Asigno el espacio
 		shmidx = shmget(IPC_PRIVATE, sizeof(int) * (x + 1), IPC_CREAT | 0666);
 		shmidy = shmget(IPC_PRIVATE, sizeof(int) * y, IPC_CREAT | 0666);
@@ -37,6 +38,7 @@ int main(int argc, char * argv[]){
 					}
 					printf("\n");
 				}
+				//finaliza el proceso de crear la cadena subhijos
 				break;
 			}
 			else{
@@ -61,8 +63,16 @@ int main(int argc, char * argv[]){
 					//añadir a pidy[j] el nuevo pid
 					pidy[j] = getpid();
 					//esperar 10 segundos para observar el proceso de los hijos
-					sleep(10);
+					sleep(5);
+					//Finaliza la cadena de búsqueda de hijos
 					break;
+				}
+			}
+			//si los procesos horizontales se han creado correctamente
+			if(j== y + 1){
+				//esperar hasta que se mueran todos los hijos horizontales
+				for(j=1;j<=y;j++){
+					wait(NULL);
 				}
 			}
 		}
