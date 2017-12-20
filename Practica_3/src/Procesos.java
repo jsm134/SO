@@ -100,7 +100,7 @@ public class Procesos{
 	
 	public boolean mejorHueco(Fichero dato){
 		int mejorPosicion;
-		int diferenciaActual, diferenciaPeor;
+		int diferenciaActual, diferencia;
 		mejorPosicion = -1;
 		for(int i = 0; i < datos.size(); i++){
 			if(datos.get(i).getNombre() == "hueco" && datos.get(i).getTam() >= dato.getTamanyo()){
@@ -108,9 +108,9 @@ public class Procesos{
 					mejorPosicion = i;
 				}
 				else{
-					diferenciaPeor = datos.get(mejorPosicion).getTam() - dato.getTamanyo();
+					diferencia = datos.get(mejorPosicion).getTam() - dato.getTamanyo();
 					diferenciaActual = datos.get(i).getTam() - dato.getTamanyo();
-					if(diferenciaActual < diferenciaPeor)
+					if(diferenciaActual < diferencia)
 						mejorPosicion = i;
 				}
 			}
